@@ -1,0 +1,4 @@
+/docker-config/apache_cert/server.pem
+/docker-config/shibboleth/cert/server.key.pem
+.idea
+.env

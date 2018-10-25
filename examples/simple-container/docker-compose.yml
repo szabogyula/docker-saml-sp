@@ -1,0 +1,12 @@
+version: '3'
+services:
+  app:
+    image: szabogyula/saml-sp
+    ports:
+      - "443:443"
+    container_name: saml-sp
+    volumes:
+      - ./public:/var/www/html/public:ro
+      - ./secure:/var/www/html/secure:ro
+    env_file:
+      - env
