@@ -6,6 +6,8 @@ RUN apt-get update && \
     apt-get install -yq git libapache2-mod-shib2 && \
     rm -rf /var/lib/apt/lists/*
 
+RUN curl -sLo /usr/local/bin/ep https://github.com/kreuzwerker/envplate/releases/download/v0.0.8/ep-linux && chmod +x /usr/local/bin/ep
+
 # configure shibboleth sp
 ADD docker-config/shibboleth/shibboleth2.xml      /etc/shibboleth/
 ADD docker-config/shibboleth/attribute-configs    /etc/shibboleth/attribute-configs
@@ -22,4 +24,4 @@ RUN a2ensite default-ssl && a2dissite 000-default && a2enmod ssl && a2enmod rewr
 ADD docker-config/run.sh /run.sh
 
 EXPOSE 80 443
-CMD /run.sh
+CMD /usr/local/bin/ep -v /etc/apache2/sites-available/default-ssl.conf /etc/shibboleth/shibboleth2.xml -- /run.sh

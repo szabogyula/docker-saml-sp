@@ -17,7 +17,7 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfiguration
 
     <!-- The entityID is the name TestShib made for your SP. -->
     <ApplicationDefaults
-            entityID="%ENTITY_ID%"
+            entityID="${ENTITY_ID}"
             REMOTE_USER="eppn"
             metadataAttributePrefix="Meta-"
             signing="true"
@@ -62,7 +62,7 @@ https://wiki.shibboleth.net/confluence/display/SHIB2/NativeSPConfiguration
         </Sessions>
 
         <!-- Error pages to display to yourself if something goes horribly wrong. -->
-        <Errors supportContact="%SUPPORT_CONTACT%" logoLocation="/shibboleth-sp/logo.jpg"
+        <Errors supportContact="${SUPPORT_CONTACT}" logoLocation="/shibboleth-sp/logo.jpg"
                 styleSheet="/shibboleth-sp/main.css"/>
 
         <!-- Loads and trusts a metadata file that describes only the Testshib IdP and how to communicate with it. -->

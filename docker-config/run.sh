@@ -1,25 +1,5 @@
 #!/bin/bash
 
-if [ -z "$ENTITY_ID" ]; then
-    echo "Need to set ENTITY_ID"
-    exit 1
-fi
-
-if [ -z "$VIRTUAL_HOST" ]; then
-    echo "Need to set VIRTUAL_HOST"
-    exit 1
-fi
-
-if [ -z "$ALIAS_SECURE" ]; then
-    echo "Need to set ALIAS_SECURE"
-    exit 1
-fi
-
-if [ -z "$SUPPORT_CONTACT" ]; then
-    echo "Need to set SUPPORT_CONTACT"
-    exit 1
-fi
-
 if [ -n "$DISCOVERY_URL" ]; then
     export SSO_ELEMENT="<SSO discoveryProtocol=\"SAMLDS\" discoveryURL=\"$DISCOVERY_URL\">SAML2</SSO>"
 fi
@@ -78,12 +58,8 @@ if [ -n "$NOSSL" ]; then
     sed -i "s/VirtualHost \*:443/VirtualHost *:80/g" /etc/apache2/sites-enabled/default-ssl.conf
     sed -i "s/SSL.*/# NOSSL/g"                       /etc/apache2/sites-enabled/default-ssl.conf
 fi
-sed -i "s/%VIRTUAL_HOST%/$VIRTUAL_HOST/g"        /etc/apache2/sites-enabled/default-ssl.conf
-sed -i "s#%ALIAS_SECURE%#$ALIAS_SECURE#g"        /etc/apache2/sites-enabled/default-ssl.conf
 
-sed -i "s#%ENTITY_ID%#$ENTITY_ID#g"                                                 /etc/shibboleth/shibboleth2.xml
 sed -i "s#%SSO_ELEMENT%#$SSO_ELEMENT#g"                                             /etc/shibboleth/shibboleth2.xml
-sed -i "s#%SUPPORT_CONTACT%#$SUPPORT_CONTACT#g"                                     /etc/shibboleth/shibboleth2.xml
 
 sed -i "s#%XML_METADATA_PROVIDER_ELEMENT%#$XML_METADATA_PROVIDER_ELEMENT#g"         /etc/shibboleth/shibboleth2.xml
 sed -i "s#%DYNAMIC_METADATA_PROVIDER_ELEMENT%#$DYNAMIC_METADATA_PROVIDER_ELEMENT#g" /etc/shibboleth/shibboleth2.xml
