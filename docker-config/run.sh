@@ -56,6 +56,7 @@ fi
 # NOSSL
 if [ -n "$NOSSL" ]; then
     sed -i "s/VirtualHost \*:443/VirtualHost *:80/g" /etc/apache2/sites-enabled/default-ssl.conf
+    sed -i "s/:443$//g"                              /etc/apache2/sites-enabled/default-ssl.conf
     sed -i "s/SSL.*/# NOSSL/g"                       /etc/apache2/sites-enabled/default-ssl.conf
 fi
 
